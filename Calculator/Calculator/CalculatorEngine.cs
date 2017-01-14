@@ -32,6 +32,15 @@ namespace Calculator
                 case "sin(x)":
                     result = Math.Sin(result);
                     break;
+                case "x^2":
+                    result = result*result;
+                    break;
+                case "x^n":
+                    result = Math.Pow(result, input);
+                    break;
+                case "Reset":
+                    result = 0;
+                    break;
             }
         }
 

@@ -4,9 +4,7 @@ namespace Calculator
 {
     public partial class CalculatorForm : Form
     {
-        private CalculatorEngine calculator=new CalculatorEngine();
-
-
+        private readonly CalculatorEngine calculator = new CalculatorEngine();
 
         public CalculatorForm()
         {
@@ -16,15 +14,15 @@ namespace Calculator
         private void binaryOperationButton_Click(object sender, System.EventArgs e)
         {
             double number = double.Parse(inputTextBox.Text);
-            Button operationButton = (Button) sender;
+            Button operationButton = (Button)sender;
             string operation = operationButton.Text;
-            
+
             calculator.Input(number);
             calculator.Input(operation);
             double result = calculator.GetResult();
+
             outputTextBox.Text = result.ToString();
             inputTextBox.Clear();
-
         }
 
         private void unaryOperationButton_Click(object sender, System.EventArgs e)
@@ -34,11 +32,8 @@ namespace Calculator
 
             calculator.Input(operation);
             double result = calculator.GetResult();
+
             outputTextBox.Text = result.ToString();
-            inputTextBox.Clear();
-
         }
-
-        
     }
 }

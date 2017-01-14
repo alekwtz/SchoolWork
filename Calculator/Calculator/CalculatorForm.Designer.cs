@@ -35,6 +35,9 @@
             this.multiplyButton = new System.Windows.Forms.Button();
             this.divideButton = new System.Windows.Forms.Button();
             this.sinButton = new System.Windows.Forms.Button();
+            this.squareButton = new System.Windows.Forms.Button();
+            this.powerButton = new System.Windows.Forms.Button();
+            this.resetButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // outputTextBox
@@ -104,11 +107,44 @@
             this.sinButton.UseVisualStyleBackColor = true;
             this.sinButton.Click += new System.EventHandler(this.unaryOperationButton_Click);
             // 
+            // squareButton
+            // 
+            this.squareButton.Location = new System.Drawing.Point(38, 144);
+            this.squareButton.Name = "squareButton";
+            this.squareButton.Size = new System.Drawing.Size(87, 26);
+            this.squareButton.TabIndex = 3;
+            this.squareButton.Text = "x^2";
+            this.squareButton.UseVisualStyleBackColor = true;
+            this.squareButton.Click += new System.EventHandler(this.unaryOperationButton_Click);
+            // 
+            // powerButton
+            // 
+            this.powerButton.Location = new System.Drawing.Point(38, 187);
+            this.powerButton.Name = "powerButton";
+            this.powerButton.Size = new System.Drawing.Size(87, 26);
+            this.powerButton.TabIndex = 3;
+            this.powerButton.Text = "x^n";
+            this.powerButton.UseVisualStyleBackColor = true;
+            this.powerButton.Click += new System.EventHandler(this.binaryOperationButton_Click);
+            // 
+            // resetButton
+            // 
+            this.resetButton.Location = new System.Drawing.Point(148, 190);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(80, 22);
+            this.resetButton.TabIndex = 4;
+            this.resetButton.Text = "Reset";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.unaryOperationButton_Click);
+            // 
             // CalculatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 273);
+            this.Controls.Add(this.resetButton);
+            this.Controls.Add(this.powerButton);
+            this.Controls.Add(this.squareButton);
             this.Controls.Add(this.sinButton);
             this.Controls.Add(this.divideButton);
             this.Controls.Add(this.multiplyButton);
@@ -132,6 +168,9 @@
         private System.Windows.Forms.Button multiplyButton;
         private System.Windows.Forms.Button divideButton;
         private System.Windows.Forms.Button sinButton;
+        private System.Windows.Forms.Button squareButton;
+        private System.Windows.Forms.Button powerButton;
+        private System.Windows.Forms.Button resetButton;
     }
 }
 
