@@ -1,53 +1,105 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace Calculator
 {
-    class CalculatorEngine
+    public class CalculatorEngine
     {
-        private double result;
-        private double input;
-
-        public void Input(double number)
+        private readonly List<string> input = new List<string>();
+        
+        public void Input(string data)
         {
-            input = number;
+            input.Add(data);
         }
 
-        public void Input(string operation)
+        public List<string> Evaluate()
         {
-            switch (operation)
+            Stack<string> operators=new Stack<string>();
+            List<string> output = new List<string>();
+
+            foreach (var data in input)
             {
-                case "+":
-                    result += input;
-                    break;
-                case "-":
-                    result -= input;
-                    break;
-                case "*":
-                    result *= input;
-                    break;
-                case "/":
-                    result /= input;
-                    break;
-                case "sin(x)":
-                    result = Math.Sin(result);
-                    break;
-                case "x^2":
-                    result = result*result;
-                    break;
-                case "x^n":
-                    result = Math.Pow(result, input);
-                    break;
-                case "Reset":
-                    result = 0;
-                    break;
+                if (IsNumber(data))
+                {
+                    output.Add(data);
+                }
+                else if(data=="(")
+                {
+                   operators.Push(data); 
+                }
+                else if (data == ")")
+                {
+                    var operatorsInsideParantheses = GetOperatorsUntil("(", operators);
+                    output.AddRange(operatorsInsideParantheses);
+                }
+                else
+                {
+                    var higherPriority = GetHigherPriority(operators, data);
+                    if (higherPriority.Count > 0)
+                    {
+                        output.AddRange(higherPriority);
+                    }
+                    operators.Push(data);
+                }
             }
+            while (operators.Count>0)    
+            {
+                output.Add(operators.Pop());
+            }
+            return output;
         }
 
+        private List<string> GetHigherPriority(Stack<string>operators,string toCompare )
+        {
+            List<string> result= new List<string>();
+            while (operators.Count>0)
+            {
+                var lastOperator = operators.Peek();
+
+                if (HasHigherPriority(toCompare, lastOperator))
+                {
+                    return result;
+                }
+                result.Add(lastOperator);
+                operators.Pop();
+            }
+            return result;
+        }
+
+        private bool HasHigherPriority(string a, string b )
+        {
+            string priority = "+-*/";
+            int indexA = priority.IndexOf(a);
+            int indexB = priority.IndexOf(b);
+            return indexA > indexB;
+        }
+
+        private bool IsNumber(string value)
+        {
+            double number;
+            return double.TryParse(value, out number);
+        }
+
+        private List<string> GetOperatorsUntil(string value, Stack<string>operators)
+        {
+            List<string> result=new List<string>();
+
+            while (true)
+            {
+               var  lastOperator = operators.Pop();
+                if (lastOperator==value)
+                {
+                    return result;
+                }
+                result.Add(lastOperator);
+            }
+        } 
+        
         public double GetResult()
         {
 
-            return result;
+            return 0;
 
         }
     }

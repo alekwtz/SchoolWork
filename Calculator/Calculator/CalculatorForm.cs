@@ -16,7 +16,7 @@ namespace Calculator
             double number = GetInput();
             string operation = GetOperation(sender);
 
-            calculator.Input(number);
+            calculator.Input(number.ToString());
             calculator.Input(operation);
             double result = calculator.GetResult();
 
